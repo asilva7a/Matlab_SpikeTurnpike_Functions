@@ -35,7 +35,9 @@ for groupNum = 1:length(groupNames)
             if any(strcmp(cell_types, thisCellType)) && isSingleUnit % Check if the cell type is in the list
                 groupsVec{end+1,1} = groupName; % Add the group name to the groupsVec
                 cellTypesVec{end+1,1} = thisCellType; % Add the cell type to the cellTypesVec
-
+                recNames_vec{end+1,1} = mouseName; % Add the mouse name to the recNames_vec
+                cellIDs_vec{end+1,1} = cellID; % Add the cell ID to the cellIDs_vec
+            
 
                 if binSize == 0
                     FRs_vec(end+1,1) = all_data.(groupName).(mouseName).(cellID).MeanFR_total;
@@ -55,6 +57,15 @@ for groupNum = 1:length(groupNames)
             end
         end 
     end
-end              
+end
+
+%% Plotting the data as heat map over the recording period
+figure;
+h = heatmap(groupsVec, cellTypesVec, FRs_vec, 'Colormap', jet, 'ColorLimits', [0 20]);
+h.Title = 'Firing rate of cells in response to treatment';
+h.XLabel = 'Groups';
+h.YLabel = 'Unit';
+h.ColorbarVisible = 'on';
+
 
 
