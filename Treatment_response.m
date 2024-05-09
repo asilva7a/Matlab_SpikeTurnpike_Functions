@@ -52,6 +52,9 @@ for groupNum = 1:length(groupNames)
                     end
                     FRs_vec(end) = max(binned_FRs_vec);
                 end
-               
+            end
+        end 
+    end
+end              
 
 
