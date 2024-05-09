@@ -28,17 +28,16 @@ for groupNum = 1:length(groupNames)
 
 
         for cellID_num = 1:length(cellIDs) % Loop through all the cells
-            cellID = cellIDs{cellID_num}; 
+            cellID = cellIDs{cellID_num};
+
             thisCellType = all_data.(groupName).(mouseName).(cellID).cellType; % Get the cell type of the cell
             isSingleUnit = all_data.(groupName).(mouseName).(cellID).isSingleUnit; % Check if the cell is a single unit
-
             if any(strcmp(cell_types, thisCellType)) && isSingleUnit % Check if the cell type is in the list
+                groupsVec{end+1,1} = groupName; % Add the group name to the groupsVec
+                cellTypesVec{end+1,1} = thisCellType; % Add the cell type to the cellTypesVec
 
-                % Get the firing rate of the cell
-                groupsVec{end+1,1} = groupName;
-                cellTypesVec{end+1,1} = thisCellType;
-
-                if binSize == 0
+                
+                if time_of_treatment == 0
                     FRs_vec(end+1,1) = all_data.(groupName).(mouseName).(cellID).MeanFR_total;
                 else
                     %calculate FR as max of 200s bins
